@@ -6,30 +6,64 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, Security $security): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        if($security->isGranted('ROLE_ADMIN')){
+
+            return $this->render('user/index.html.twig', [
+                'users' => $userRepository->findAll(),
+            ]);
+        }
+        else {
+            return $this->render('user/index.html.twig', [
+                'users' => $userRepository->findEtudiants(),
+            ]);
+        }
     }
+    
+    // #[Route('/etudiants', name: 'app_user_etudiants', methods: ['GET'])]
+    // public function etudiants(UserRepository $userRepository): Response
+    // {
+    //     return $this->render('user/index.html.twig', [
+    //         'users' => $userRepository->findEtudiants(),
+    //     ]);
+    // }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+             // Récupérer le mot de passe en clair depuis le formulaire
+             $plainPassword = $form->get('password')->getData();
+
+             // Hacher le mot de passe
+             $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
+ 
+             // Définir le mot de passe haché sur l'entité User
+             $user->setPassword($hashedPassword);
+            
+              // Ajouter un rôle par défaut si nécessaire
+              if (empty($user->getRoles())) {
+                $user->setRoles(['ROLE_ETUDIANT']);
+            } 
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -78,4 +112,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

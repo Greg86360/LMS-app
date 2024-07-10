@@ -27,14 +27,21 @@ class Cours
     #[ORM\OneToMany(targetEntity: Etape::class, mappedBy: 'cours')]
     private Collection $etapes;
 
-    #[ORM\ManyToOne(inversedBy: 'cours')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $formateur = null;
+    // #[ORM\ManyToOne(inversedBy: 'cours')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?User $formateur = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'cours')]
+    private Collection $users;
 
    
     public function __construct()
     {
         $this->etapes = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,14 +103,41 @@ class Cours
         return $this;
     }
 
-    public function getFormateur(): ?User
+    // public function getFormateur(): ?User
+    // {   
+    //     return $this->formateur;
+    // }
+
+    // public function setFormateur(?User $formateur): static
+    // {
+    //     $this->formateur = $formateur;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
     {
-        return $this->formateur;
+        return $this->users;
     }
 
-    public function setFormateur(?User $formateur): static
+    public function addUser(User $user): static
     {
-        $this->formateur = $formateur;
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addCour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCour($this);
+        }
 
         return $this;
     }

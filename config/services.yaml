@@ -22,3 +22,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+    # Alias pour le Logger
+    Psr\Log\LoggerInterface: '@monolog.logger'
+
+    # Configuration explicite des services si nécessaire
+    App\DataFixtures\AppFixtures:
+        arguments:
+            $passwordHasher: '@security.password_hasher'
+            $logger: '@monolog.logger'

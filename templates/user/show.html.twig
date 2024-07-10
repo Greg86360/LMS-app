@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>User</h1>
+	<h1>{{user.prenom}}</h1>
 
 	<table class="table">
 		<tbody>
@@ -31,6 +31,17 @@
 			<tr>
 				<th>Prenom</th>
 				<td>{{ user.Prenom }}</td>
+			</tr>
+			<tr>
+				<th>Cours suivis</th>
+				<td>
+				<ul>
+				{% for cours in user.Cours %}
+
+					<li> {{ cours.titre }}</li>
+				{% endfor %}
+				</ul>
+				</td>
 			</tr>
 		</tbody>
 	</table>

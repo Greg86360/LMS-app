@@ -5,6 +5,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th scope="col">cours</th>
 				<th scope="col">titre</th>
 				<th scope="col">description</th>
                 <th scope="col">contenu</th>
@@ -14,7 +15,7 @@
 
 			{% for etape in etapes %}
 				<tr>
-					
+					<td>{{etape.cours.titre}}</td>
 					<td>{{etape.titre}}</td>
 					<td>{{etape.description}}</td>
                     <td>{{etape.contenu}}</td>

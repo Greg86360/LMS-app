@@ -39,4 +39,6 @@ class HomeController extends AbstractController
             'etapes'=>$etapes->findAll()
         ]);
     }
+
+    
 }
