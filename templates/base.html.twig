@@ -24,7 +24,7 @@
 							{% if is_granted('ROLE_FORMATEUR') %}
 								<a class="nav-link" href="{{path('app_user_index')}}">Utilisateurs</a>
 								<a class="nav-link" href="{{path('app_cours')}}">Cours</a>
-								<a class="nav-link" href="{{path('app_etapes')}}">Etapes</a>
+								<a class="nav-link" href="{{path('app_etape_index')}}">Etapes</a>
 							{% elseif is_granted('ROLE_ETUDIANT') %}
 								<a class="nav-link" href="{{path('app_profile')}}">Profil</a>
 							{% endif %}

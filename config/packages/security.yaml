@@ -42,7 +42,7 @@ security:
         # - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/cours, roles: ROLE_FORMATEUR }
         - { path: ^/user, roles: ROLE_FORMATEUR }
-        - { path: ^/etapes, roles: ROLE_FORMATEUR }
+        - { path: ^/etape, roles: ROLE_FORMATEUR }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_FORMATEUR
