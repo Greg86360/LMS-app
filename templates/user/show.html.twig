@@ -32,17 +32,19 @@
 				<th>Prenom</th>
 				<td>{{ user.Prenom }}</td>
 			</tr>
+
+			{% if user.Cours is not empty  %}
 			<tr>
 				<th>Cours suivis</th>
 				<td>
-				<ul>
-				{% for cours in user.Cours %}
-
-					<li> {{ cours.titre }}</li>
-				{% endfor %}
-				</ul>
+					<ul>
+						{% for cours in user.Cours %}
+							<li> {{ cours.titre }}</li>
+						{% endfor %}
+					</ul>
 				</td>
 			</tr>
+			{% endif %}
 		</tbody>
 	</table>
 	<div class="d-flex">

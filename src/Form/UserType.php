@@ -26,9 +26,11 @@ class UserType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('email')
-            ->add('password')
-            // ->add('roles')
-            ->add('Cours')
+            ->add('password');
+            if ($this->security->isGranted('ROLE_ADMIN')){
+            $builder->add('roles');
+            }
+            $builder->add('Cours')
 
             
             ->add('Cours', EntityType::class,[
