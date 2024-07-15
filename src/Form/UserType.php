@@ -30,6 +30,7 @@ class UserType extends AbstractType
             if ($this->security->isGranted('ROLE_ADMIN')){
             $builder->add('roles');
             }
+            
             $builder->add('Cours')
 
             
@@ -39,6 +40,8 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ]);
+
+          
            
 
         // Conditionner l'ajout du champ utilisateur
@@ -50,8 +53,22 @@ class UserType extends AbstractType
             ],
             'multiple' => true,
             'expanded' => false,
-        ]);
+            'data' => ['ROLE_FORMATEUR'] // Définir le rôle Formateur comme sélectionné par défaut
+           
+            ]);
+
+            // $builder->add('Cours', EntityType::class, [
+            //     'class' => Cours::class,
+            //     'choice_label' => 'titre',
+            //     'multiple' => true,
+            //     'expanded' => true,
+            //     'attr' => [
+            //         'class' => 'd-test',
+            //     ]
+            // ]);
+        
         }
+      
 
       
     }
