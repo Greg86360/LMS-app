@@ -31,10 +31,10 @@ class CoursController extends AbstractController
      
 
         $cour = new Cours();
-        // $form = $this->createForm(CoursType::class, $cour);
-        $form = $this->createForm(CoursType::class, $cour, [
-            'formateurs' => $formateurs,
-        ]);
+        $form = $this->createForm(CoursType::class, $cour);
+        // $form = $this->createForm(CoursType::class, $cour, [
+        //     'formateurs' => $formateurs,
+        // ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

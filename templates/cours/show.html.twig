@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Cours</h1>
 
+  
+
     <table class="table">
         <tbody>
             <tr>
@@ -18,6 +20,16 @@
             <tr>
                 <th>Description</th>
                 <td>{{ cour.description }}</td>
+            </tr>
+             <tr>
+                <th>Étapes</th>
+                <td>
+                    <ul>
+                        {% for etape in cour.etapes %}
+                          <li>{{ etape.titre }}</li>
+                        {% endfor %}  
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

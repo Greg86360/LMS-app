@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,21 +23,21 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            // ->add('roles', ChoiceType::class, [
-            //         'choices' => [
-            //         'Formateur' => 'ROLE_FORMATEUR',
-            //         'Etudiant' => 'ROLE_ETUDIANT',
-            //     ],
-            //     'multiple' => true,
-            //     'expanded' => false,
-            // ])
-        
-            ->add('password')
             ->add('Nom')
             ->add('Prenom')
+            ->add('email')
+            ->add('password')
+            // ->add('roles')
+            ->add('Cours')
+
             
-        ;
+            ->add('Cours', EntityType::class,[
+                'class'=>Cours::class,
+                'choice_label'=>'titre',
+                'multiple' => true,
+                'expanded' => true,
+            ]);
+           
 
         // Conditionner l'ajout du champ utilisateur
         if ($this->security->isGranted('ROLE_ADMIN')) {

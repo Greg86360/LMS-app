@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	{% if app.request.pathinfo == path('app_user_index') %}
+	{% if is_granted("ROLE_ADMIN")  %}
 		<h1>Liste des utilisateurs</h1>
     {% else %}
         <h1>Liste des étudiants</h1>    
@@ -12,12 +12,12 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
+				{# <th>Id</th> #}
 				<th>Email</th>
 				{% if app.request.pathinfo == path('app_user_index') %}
 					<th>Roles</th>
 				{% endif %}
-				<th>Password</th>
+				{# <th>Password</th> #}
 				<th>Nom</th>
 				<th>Prenom</th>
 				<th>actions</th>
@@ -26,12 +26,12 @@
 		<tbody>
 			{% for user in users %}
 				<tr>
-					<td>{{ user.id }}</td>
+					{# <td>{{ user.id }}</td> #}
 					<td>{{ user.email }}</td>
 					{% if app.request.pathinfo == path('app_user_index') %}
 						<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
 					{% endif %}
-					<td>{{ user.password }}</td>
+					{# <td>{{ user.password }}</td> #}
 					<td>{{ user.Nom }}</td>
 					<td>{{ user.Prenom }}</td>
 					<td>

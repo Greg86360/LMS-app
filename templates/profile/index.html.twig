@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil étudiant
+{% endblock %}
+
+{% block body %}
+	<h1>{{user.prenom}}
+		{{user.nom}}</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				{# <th>Id</th> #}
+				<th>Cours suivis</th>
+				<th>Description</th>
+				<th>Étapes</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for cour in user.cours %}
+				<tr>
+					{# <td>{{ cour.id }}</td> #}
+					<td class="col-4">{{ cour.titre }}</td>
+					<td class="col-6">{{ cour.description }}</td>
+					<td>
+						<ul>
+							{% for etape in cour.etapes %}
+								<li>{{etape.titre}}</li>
+							{% endfor %}
+						</ul>
+    				</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}
