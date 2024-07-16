@@ -2,7 +2,7 @@ let select = document.getElementById('user_roles');
 let options = document.querySelectorAll('option');
 let fieldset = document.querySelector('fieldset');
 // console.log(options);
-fieldset.classList.add('d-none');
+// fieldset.classList.add('d-none');
 
 for( let option of options){
     let valeur = option.value;
