@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Data;
-
 return
      [
         'Introduction à la programmation' => 'Ce cours couvre les concepts fondamentaux de la programmation, y compris les variables, les structures de contrôle, les fonctions et les concepts de base de l\'algorithmique. Idéal pour les débutants.',
