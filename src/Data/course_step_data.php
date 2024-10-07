@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Data;
+
 return [
     'Introduction à la programmation' => [
         ['titre' => 'Les bases de la programmation', 'description' => 'Introduction aux concepts de base de la programmation.', 'contenu' => 'Contenu textuel ou lien vidéo'],
