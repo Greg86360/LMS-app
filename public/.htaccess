@@ -1,0 +1,26 @@
+# public/.htaccess
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Rediriger tout vers index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Protéger les fichiers sensibles
+<FilesMatch "(^\.|composer\.(json|lock|phar)$|README\.md|UPGRADE\.md|bin/|var/)">
+    Require all denied
+</FilesMatch>
+
+# Désactiver l'énumération des répertoires
+Options -Indexes
+
+# Ajouter des en-têtes de sécurité
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
