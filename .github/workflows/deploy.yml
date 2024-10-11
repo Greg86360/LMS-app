@@ -17,8 +17,12 @@ jobs:
       run: |
         mkdir -p /tmp/.ssh/  # Crée un répertoire temporaire pour SSH
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/.ssh/id_rsa  # Écrit la clé privée
+        echo "Contenu de la clé privée :"
+        cat /tmp/.ssh/id_rsa  # Affiche la clé pour vérification (à utiliser avec précaution)
         chmod 600 /tmp/.ssh/id_rsa  # Change les permissions
         ssh-keyscan -H lms-app.alwaysdata.net >> /tmp/.ssh/known_hosts  # Ajoute le serveur aux known_hosts
+        echo "Contenu de known_hosts :"
+        cat /tmp/.ssh/known_hosts  # Affiche le contenu de known_hosts
 
     - name: Deploy code via SSH
       run: |
