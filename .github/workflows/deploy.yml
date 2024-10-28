@@ -15,7 +15,7 @@ jobs:
 
     - name: Test Connection to Alwaysdata
       run: |
-        ping -c 3 lms-app.alwaysdata.net
+        ping -c 3 https://lms-app.alwaysdata.net/
     
     - name: Setup SSH
       run: |
