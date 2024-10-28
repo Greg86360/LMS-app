@@ -13,6 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Test Connection to Alwaysdata
+      run: |
+        ping -c 3 lms-app.alwaysdata.net
+    
     - name: Setup SSH
       run: |
         # Assurez-vous que le répertoire ~/.ssh existe
@@ -21,9 +25,6 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
-    - name: Test Connection to Alwaysdata
-      run: |
-        ping -c 3 lms-app.alwaysdata.net
 
 
         # Ajoute le serveur Alwaysdata à known_hosts
