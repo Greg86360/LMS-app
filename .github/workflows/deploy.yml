@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # Remplacez par votre branche principale, par exemple 'master'
+      - master  # Utilisez votre branche principale
 
 jobs:
   deploy:
@@ -15,16 +15,15 @@ jobs:
 
     - name: Setup SSH
       run: |
-        # Crée le répertoire ~/.ssh s'il n'existe pas déjà
+        # Assurez-vous que le répertoire ~/.ssh existe
         mkdir -p ~/.ssh
-        # Écrit la clé privée (depuis les Secrets) dans ~/.ssh/id_rsa
+        # Écrit la clé privée à partir des secrets (si nécessaire)
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        # Définit les permissions appropriées pour la clé privée
         chmod 600 ~/.ssh/id_rsa
-        # Ajoute le serveur Alwaysdata à la liste des hôtes connus
+        # Ajoute le serveur Alwaysdata à known_hosts
         ssh-keyscan -H lms-app.alwaysdata.net >> ~/.ssh/known_hosts
 
     - name: Deploy code via SSH
       run: |
-        # Se connecte au serveur via SSH et exécute les commandes de déploiement
+        # Se connecte à Alwaysdata et déploie le code
         ssh -i ~/.ssh/id_rsa lms-app@lms-app.alwaysdata.net "cd /home/lms-app && git pull && ./deploy-script.sh"
