@@ -13,9 +13,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Test Connection to Alwaysdata
-      run: |
-        ping -c 3 lms-app.alwaysdata.net
+    # - name: Test Connection to Alwaysdata
+    #   run: |
+    #     ping -c 3 lms-app.alwaysdata.net
     
     - name: Setup SSH
       run: |
