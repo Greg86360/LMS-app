@@ -28,5 +28,4 @@ jobs:
 
     - name: Deploy code via SSH
       run: |
-        # Se connecte à Alwaysdata et déploie le code en forçant l'IPv4
-        ssh -4 -i ~/.ssh/id_rsa lms-app@lms-app.alwaysdata.net "cd /home/lms-app && git pull && ./deploy-script.sh"
+        ssh lms-app@lms-app.alwaysdata.net "cd /home/lms-app && git pull && ./deploy-script.sh"
