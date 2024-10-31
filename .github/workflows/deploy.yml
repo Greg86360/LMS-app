@@ -24,8 +24,7 @@ jobs:
         # Écrit la clé privée à partir des secrets (si nécessaire)
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        # Ajoute le serveur Alwaysdata à known_hosts en forçant l'IPv4
-        ssh-keyscan -4 -H lms-app.alwaysdata.net >> ~/.ssh/known_hosts
+       
 
     - name: Deploy code via SSH
       run: |
