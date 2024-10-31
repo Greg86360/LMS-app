@@ -28,4 +28,4 @@ jobs:
 
     - name: Deploy code via SSH
       run: |
-        ssh lms-app@lms-app.alwaysdata.net "cd /home/lms-app && git pull && ./deploy-script.sh"
+         ssh -o StrictHostKeyChecking=no lms-app@lms-app.alwaysdata.net "cd /home/lms-app && git pull && ./deploy-script.sh"
